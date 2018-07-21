@@ -1,7 +1,12 @@
 package it.discovery.repository;
 
 import it.discovery.model.Book;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +18,7 @@ import java.util.Map;
  * @author morenets
  *
  */
+@Named
 public class DBBookRepository implements BookRepository {
 	private final Map<Integer, Book> books = new HashMap<>();
 
@@ -21,11 +27,13 @@ public class DBBookRepository implements BookRepository {
 	private String server;
 
 	private String db;
-	
+
+	@PostConstruct
 	public void init() {
 		System.out.println("Started db repository with server:" + server + " and database: " + db );
 	}
 
+	@PreDestroy
 	public void destroy() {
 		System.out.println("Shutting down repository ... ");
 	}

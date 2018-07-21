@@ -2,7 +2,6 @@ package it.discovery.service;
 
 import it.discovery.model.Book;
 import it.discovery.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
