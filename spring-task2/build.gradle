@@ -1,0 +1,4 @@
+dependencies {
+    compile 'org.springframework:spring-context:' + springVersion
+    compile 'javax.inject:javax.inject:1'
+}
