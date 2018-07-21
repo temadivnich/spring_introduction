@@ -10,6 +10,7 @@
 		<constructor-arg ref="repository"></constructor-arg>
 	</bean>
 
-	<bean id="repository" class="it.discovery.repository.DBBookRepository" />
+	<bean id="repository" class="it.discovery.repository.DBBookRepository"
+	init-method="init" destroy-method="destroy"/>
 
 </beans>

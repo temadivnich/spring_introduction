@@ -1,7 +1,9 @@
 package it.discovery.loader;
 
+import java.util.Arrays;
 import java.util.List;
 
+import it.discovery.repository.BookRepository;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import it.discovery.model.Book;
@@ -21,6 +23,9 @@ public class SpringStarter {
 
 			List<Book> books = service.findBooks();
 			System.out.println(books);
+			System.out.println("Total bean count: " + context.getBeanDefinitionCount());
+			System.out.println("Beans: " + Arrays.asList(context.getBeanDefinitionNames()));
+			System.out.println("BookRepository beans: " + context.getBeansOfType(BookRepository.class));
 		}
 
 	}
