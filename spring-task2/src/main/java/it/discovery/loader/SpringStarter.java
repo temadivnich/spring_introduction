@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import it.discovery.repository.BookRepository;
+import it.discovery.service.BookServiceImpl;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import it.discovery.model.Book;
 import it.discovery.service.BookService;
+import org.springframework.stereotype.Service;
 
 public class SpringStarter {
 	public static void main(String[] args) {
@@ -26,6 +28,10 @@ public class SpringStarter {
 			System.out.println("Total bean count: " + context.getBeanDefinitionCount());
 			System.out.println("Beans: " + Arrays.asList(context.getBeanDefinitionNames()));
 			System.out.println("BookRepository beans: " + context.getBeansOfType(BookRepository.class));
+
+//			Class<BookServiceImpl> clz = BookServiceImpl.class;
+//			Service service1 = clz.getDeclaredAnnotation(Service.class);
+//			System.out.println(service1);
 		}
 	}
 }

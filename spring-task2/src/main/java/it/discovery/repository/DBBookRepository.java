@@ -1,6 +1,7 @@
 package it.discovery.repository;
 
 import it.discovery.model.Book;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.Map;
  * @author morenets
  *
  */
+@Repository
 public class DBBookRepository implements BookRepository {
 	private final Map<Integer, Book> books = new HashMap<>();
 
