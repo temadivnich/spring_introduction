@@ -3,12 +3,18 @@ package it.discovery.loader;
 import java.util.List;
 
 import it.discovery.model.Book;
-import it.discovery.service.MainBookService;
+import it.discovery.repository.BookRepository;
+import it.discovery.repository.DBBookRepository;
+import it.discovery.service.BookService;
+import it.discovery.service.BookServiceImpl;
 
 public class BootstrapLoader {
 
 	public static void main(String[] args) {
-		MainBookService service = new MainBookService();
+		DBBookRepository bookRepository = new DBBookRepository();
+		bookRepository.setDb("library");
+		bookRepository.setServer("localhost");
+		BookService service = new BookServiceImpl(bookRepository);
 		Book book = new Book();
 		book.setName("Introduction into Spring");
 		book.setPages(100);

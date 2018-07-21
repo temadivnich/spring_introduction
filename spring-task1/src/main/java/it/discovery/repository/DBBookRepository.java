@@ -13,14 +13,14 @@ import it.discovery.model.Book;
  * @author morenets
  *
  */
-public class DBBookRepository {
+public class DBBookRepository implements BookRepository {
 	private final Map<Integer, Book> books = new HashMap<>();
 
 	private int counter = 0;
 
-	private final String server = "localhost";
+	private String server;
 
-	private final String db = "library";
+	private String db;
 	
 	public void init() {
 		System.out.println("Started db repository with server:" + server + " and database: " + db );
@@ -30,6 +30,7 @@ public class DBBookRepository {
 		System.out.println("Shutting down repository ... ");
 	}
 	
+	@Override
 	public void saveBook(Book book) {
 		if (book.getId() == 0) {
 			counter++;
@@ -41,13 +42,29 @@ public class DBBookRepository {
 		System.out.println("Saved book " + book);
 	}
 	
+	@Override
 	public Book findBookById(int id) {
 		return books.get(id);
 	}
 
+	@Override
 	public List<Book> findBooks() {
 		return new ArrayList<>(books.values());
 	}
-	
 
+	public String getServer() {
+		return server;
+	}
+
+	public void setServer(String server) {
+		this.server = server;
+	}
+
+	public String getDb() {
+		return db;
+	}
+
+	public void setDb(String db) {
+		this.db = db;
+	}
 }
