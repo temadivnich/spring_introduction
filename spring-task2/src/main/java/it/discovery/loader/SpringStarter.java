@@ -27,7 +27,5 @@ public class SpringStarter {
 			System.out.println("Beans: " + Arrays.asList(context.getBeanDefinitionNames()));
 			System.out.println("BookRepository beans: " + context.getBeansOfType(BookRepository.class));
 		}
-
 	}
-
 }

@@ -2,12 +2,14 @@ package it.discovery.service;
 
 import it.discovery.model.Book;
 import it.discovery.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class BookServiceImpl implements BookService {
     private final BookRepository repository;
 
+    @Autowired
     public BookServiceImpl(BookRepository repository) {
         this.repository = repository;
         System.out.println("Using db repository");
