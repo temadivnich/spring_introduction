@@ -1,8 +1,7 @@
 package it.discovery.repository;
 
 import it.discovery.model.Book;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -24,9 +23,14 @@ public class DBBookRepository implements BookRepository {
 
 	private int counter = 0;
 
-	private String server;
+	private final String server;
 
-	private String db;
+	private final String db;
+
+	public DBBookRepository(@Value("${repository.db.server}") String server, @Value("${repository.db.db}") String db) {
+		this.server = server;
+		this.db = db;
+	}
 
 	@PostConstruct
 	public void init() {
@@ -64,15 +68,7 @@ public class DBBookRepository implements BookRepository {
 		return server;
 	}
 
-	public void setServer(String server) {
-		this.server = server;
-	}
-
 	public String getDb() {
 		return db;
-	}
-
-	public void setDb(String db) {
-		this.db = db;
 	}
 }
