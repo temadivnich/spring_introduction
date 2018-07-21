@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.List;
 
+import it.discovery.config.AppConfiguration;
 import it.discovery.repository.BookRepository;
 import it.discovery.service.BookServiceImpl;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class SpringStarter {
 	public static void main(String[] args) {
 		try (AnnotationConfigApplicationContext context =
-					 new AnnotationConfigApplicationContext("it.discovery")) {
+					 new AnnotationConfigApplicationContext(AppConfiguration.class)) {
 			
 			BookService service = context.getBean(BookService.class);
 			

@@ -1,8 +1,6 @@
 package it.discovery.repository;
 
 import it.discovery.model.Book;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,8 +13,6 @@ import java.util.Map;
  * @author morenets
  *
  */
-@Repository
-@Qualifier("xml")
 public class XMLBookRepository implements BookRepository {
 	private final Map<Integer, Book> books = new HashMap<>();
 
@@ -31,7 +27,12 @@ public class XMLBookRepository implements BookRepository {
 	public void destroy() {
 		System.out.println("Shutting down xml repository ... ");
 	}
-	
+
+
+	public XMLBookRepository() {
+		System.out.println("creating XML repository");
+	}
+
 	@Override
 	public void saveBook(Book book) {
 		if (book.getId() == 0) {

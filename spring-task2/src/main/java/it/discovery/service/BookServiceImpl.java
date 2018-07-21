@@ -2,17 +2,14 @@ package it.discovery.service;
 
 import it.discovery.model.Book;
 import it.discovery.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public class BookServiceImpl implements BookService {
     private final BookRepository repository;
 
-    public BookServiceImpl(@Qualifier("xml") BookRepository repository) {
+    public BookServiceImpl(BookRepository repository) {
         this.repository = repository;
         System.out.println("Using repository " + repository.getClass().getSimpleName());
     }
