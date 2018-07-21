@@ -2,7 +2,6 @@ package it.discovery.repository;
 
 import it.discovery.model.Book;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -17,23 +16,20 @@ import java.util.Map;
  *
  */
 @Repository
-//@Primary
-@Qualifier("db")
-public class DBBookRepository implements BookRepository {
+@Qualifier("xml")
+public class XMLBookRepository implements BookRepository {
 	private final Map<Integer, Book> books = new HashMap<>();
 
 	private int counter = 0;
 
-	private String server;
+	private String path;
 
-	private String db;
-	
 	public void init() {
-		System.out.println("Started db repository with server:" + server + " and database: " + db );
+		System.out.println("Started xml repository with file path:" + path );
 	}
 
 	public void destroy() {
-		System.out.println("Shutting down repository ... ");
+		System.out.println("Shutting down xml repository ... ");
 	}
 	
 	@Override
@@ -58,19 +54,11 @@ public class DBBookRepository implements BookRepository {
 		return new ArrayList<>(books.values());
 	}
 
-	public String getServer() {
-		return server;
+	public String getPath() {
+		return path;
 	}
 
-	public void setServer(String server) {
-		this.server = server;
-	}
-
-	public String getDb() {
-		return db;
-	}
-
-	public void setDb(String db) {
-		this.db = db;
+	public void setPath(String path) {
+		this.path = path;
 	}
 }

@@ -1,10 +1,12 @@
 package it.discovery.loader;
 
+import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.List;
 
 import it.discovery.repository.BookRepository;
 import it.discovery.service.BookServiceImpl;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import it.discovery.model.Book;
@@ -13,7 +15,8 @@ import org.springframework.stereotype.Service;
 
 public class SpringStarter {
 	public static void main(String[] args) {
-		try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-beans.xml")) {
+		try (AnnotationConfigApplicationContext context =
+					 new AnnotationConfigApplicationContext("it.discovery")) {
 			
 			BookService service = context.getBean(BookService.class);
 			
