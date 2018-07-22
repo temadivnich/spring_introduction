@@ -31,7 +31,7 @@ public class AppConfiguration {
     }
 
     @Bean
-    public BookService bookService(@XmlQualifier BookRepository bookRepository) {
+    public BookService bookService(BookRepository bookRepository) {
         return new BookServiceImpl(bookRepository);
     }
 }

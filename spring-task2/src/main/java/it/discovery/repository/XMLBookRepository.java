@@ -1,6 +1,8 @@
 package it.discovery.repository;
 
+import it.discovery.config.ConditionalRepositoryType;
 import it.discovery.model.Book;
+import org.springframework.context.annotation.Profile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +15,8 @@ import java.util.Map;
  * @author morenets
  *
  */
+@Profile("dev")
+@ConditionalRepositoryType("xml")
 public class XMLBookRepository implements BookRepository {
 	private final Map<Integer, Book> books = new HashMap<>();
 

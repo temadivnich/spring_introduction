@@ -17,8 +17,13 @@ import org.springframework.stereotype.Service;
 public class SpringStarter {
 	public static void main(String[] args) {
 		try (AnnotationConfigApplicationContext context =
-					 new AnnotationConfigApplicationContext(AppConfiguration.class)) {
-			
+					 new AnnotationConfigApplicationContext()) {
+
+			context.getEnvironment().setActiveProfiles("dev",
+					"test");
+			context.register(AppConfiguration.class);
+			context.refresh();
+
 			BookService service = context.getBean(BookService.class);
 			
 			Book book = new Book();

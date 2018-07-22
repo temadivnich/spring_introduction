@@ -1,7 +1,9 @@
 package it.discovery.repository;
 
+import it.discovery.config.ConditionalRepositoryType;
 import it.discovery.model.Book;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -18,6 +20,8 @@ import java.util.Map;
  *
  */
 @Named
+@Profile("test")
+@ConditionalRepositoryType("db")
 public class DBBookRepository implements BookRepository {
 	private final Map<Integer, Book> books = new HashMap<>();
 
