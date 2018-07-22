@@ -10,12 +10,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.lang.annotation.*;
 
 @Configuration
 @ComponentScan("it.discovery")
 @PropertySource("application.properties")
+@EnableAsync
 public class AppConfiguration {
 
 //    @Qualifier("db")

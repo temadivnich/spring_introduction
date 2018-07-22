@@ -4,6 +4,8 @@ import it.discovery.model.Book;
 import it.discovery.repository.BookRepository;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class BookServiceImpl implements BookService {
     private final BookRepository repository;
@@ -25,6 +27,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> findBooks() {
-        return repository.findBooks();
+        Future<List<Book>> future = repository.findBooks();
+
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

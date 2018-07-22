@@ -4,6 +4,8 @@ import it.discovery.config.ConditionalRepositoryType;
 import it.discovery.model.Book;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 /**
  * Handles database-related book operations
@@ -47,6 +50,7 @@ public class DBBookRepository implements BookRepository {
 	}
 	
 	@Override
+	@Async
 	public void saveBook(Book book) {
 		if (book.getId() == 0) {
 			counter++;
@@ -64,8 +68,9 @@ public class DBBookRepository implements BookRepository {
 	}
 
 	@Override
-	public List<Book> findBooks() {
-		return new ArrayList<>(books.values());
+	@Async
+	public Future<List<Book>> findBooks() {
+		return new AsyncResult<>(new ArrayList<>(books.values()));
 	}
 
 	public String getServer() {

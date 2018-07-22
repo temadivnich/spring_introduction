@@ -1,13 +1,14 @@
 package it.discovery.repository;
 
-import it.discovery.config.ConditionalRepositoryType;
 import it.discovery.model.Book;
 import org.springframework.context.annotation.Profile;
+import org.springframework.scheduling.annotation.AsyncResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 /**
  * Handles database-related book operations
@@ -54,8 +55,8 @@ public class XMLBookRepository implements BookRepository {
 	}
 
 	@Override
-	public List<Book> findBooks() {
-		return new ArrayList<>(books.values());
+	public Future<List<Book>> findBooks() {
+		return new AsyncResult<>(new ArrayList<>(books.values()));
 	}
 
 	public String getPath() {
