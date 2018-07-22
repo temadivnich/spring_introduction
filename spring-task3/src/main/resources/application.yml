@@ -1,0 +1,12 @@
+server:
+  port: 9000
+
+repository:
+  db:
+    server: localhost
+    db: test
+  type: db
+
+spring:
+  profiles:
+     active: dev,test

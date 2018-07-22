@@ -9,11 +9,11 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.*;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 @Configuration
 @ComponentScan("it.discovery")
-@PropertySource("application.properties")
 @EnableAsync
 //@Lazy
 public class AppConfiguration {
