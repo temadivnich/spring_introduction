@@ -1,16 +1,17 @@
 package it.discovery.config;
 
+import it.discovery.event.EventBus;
 import it.discovery.log.Logger;
 import it.discovery.repository.BookRepository;
 import it.discovery.repository.XMLBookRepository;
 import it.discovery.service.BookService;
 import it.discovery.service.BookServiceImpl;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.*;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
-
-import java.util.List;
 
 @Configuration
 @ComponentScan("it.discovery")
@@ -34,8 +35,8 @@ public class AppConfiguration {
 
     @Bean
     public BookService bookService(BookRepository bookRepository,
-                                   List<Logger> loggers) {
-        return new BookServiceImpl(bookRepository, loggers);
+                                   ApplicationEventPublisher eventPublisher) {
+        return new BookServiceImpl(bookRepository, eventPublisher);
     }
 
     @Bean
@@ -48,6 +49,18 @@ public class AppConfiguration {
     public Logger inMemoryLogger() {
         return message -> System.out.println("Logged to memory:" +
                 message);
+    }
+
+//    @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public Logger verySlowLogger() {
+        return message -> {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
     }
 
 

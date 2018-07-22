@@ -1,8 +1,10 @@
 package it.discovery.service;
 
-import it.discovery.log.Logger;
+import it.discovery.event.EventBus;
+import it.discovery.event.LogEvent;
 import it.discovery.model.Book;
 import it.discovery.repository.BookRepository;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -11,11 +13,12 @@ import java.util.concurrent.Future;
 public class BookServiceImpl implements BookService {
     private final BookRepository repository;
 
-    private final List<Logger> loggers;
+    private final ApplicationEventPublisher eventPublisher;
 
-    public BookServiceImpl(BookRepository repository, List<Logger> loggers) {
+    public BookServiceImpl(BookRepository repository,
+                           ApplicationEventPublisher eventPublisher) {
         this.repository = repository;
-        this.loggers = loggers;
+        this.eventPublisher = eventPublisher;
         System.out.println("Using repository " + repository.getClass().getSimpleName());
     }
 
@@ -23,7 +26,7 @@ public class BookServiceImpl implements BookService {
     public void saveBook(Book book) {
         repository.saveBook(book);
 
-        loggers.forEach(logger -> logger.log("Book saved"));
+        eventPublisher.publishEvent(new LogEvent(this, "Book saved"));
     }
 
     @Override
