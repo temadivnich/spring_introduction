@@ -3,6 +3,7 @@ package it.discovery.repository;
 import it.discovery.config.ConditionalRepositoryType;
 import it.discovery.model.Book;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Async;
@@ -27,19 +28,20 @@ import java.util.concurrent.Future;
 @Profile("test")
 @ConditionalRepositoryType("db")
 @Lazy
+@ConfigurationProperties("repository.db")
 public class DBBookRepository implements BookRepository {
 	private final Map<Integer, Book> books = new HashMap<>();
 
 	private int counter = 0;
 
-	private final String server;
+	private String server;
 
-	private final String db;
-
-	public DBBookRepository(@Value("${repository.db.server}") String server, @Value("${repository.db.db}") String db) {
-		this.server = server;
-		this.db = db;
-	}
+	private String db;
+//
+//	public DBBookRepository(@Value("${repository.db.server}") String server, @Value("${repository.db.db}") String db) {
+//		this.server = server;
+//		this.db = db;
+//	}
 
 	@PostConstruct
 	public void init() {
@@ -81,5 +83,13 @@ public class DBBookRepository implements BookRepository {
 
 	public String getDb() {
 		return db;
+	}
+
+	public void setServer(String server) {
+		this.server = server;
+	}
+
+	public void setDb(String db) {
+		this.db = db;
 	}
 }

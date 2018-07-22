@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @ComponentScan("it.discovery")
 @PropertySource("application.properties")
 @EnableAsync
-@Lazy
+//@Lazy
 public class AppConfiguration {
 
 //    @Qualifier("db")
