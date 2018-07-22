@@ -52,7 +52,7 @@ public class DBBookRepository implements BookRepository {
 	}
 	
 	@Override
-	@Async
+	//@Async
 	public void saveBook(Book book) {
 		if (book.getId() == 0) {
 			counter++;
