@@ -11,6 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import java.lang.annotation.*;
+
 @Configuration
 @ComponentScan("it.discovery")
 @PropertySource("application.properties")
@@ -22,14 +24,14 @@ public class AppConfiguration {
 //        return new DBBookRepository();
 //    }
 
-    @Qualifier("xml")
+    @XmlQualifier
     @Bean
     public BookRepository xmlRepository() {
         return new XMLBookRepository();
     }
 
     @Bean
-    public BookService bookService() {
-        return new BookServiceImpl(xmlRepository());
+    public BookService bookService(@XmlQualifier BookRepository bookRepository) {
+        return new BookServiceImpl(bookRepository);
     }
 }
