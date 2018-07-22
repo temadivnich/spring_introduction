@@ -26,6 +26,7 @@ public class AppConfiguration {
 
     @XmlQualifier
     @Bean
+    @ConditionalRepositoryType("xml")
     public BookRepository xmlRepository() {
         return new XMLBookRepository();
     }

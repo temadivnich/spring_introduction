@@ -16,7 +16,6 @@ import java.util.Map;
  *
  */
 @Profile("dev")
-@ConditionalRepositoryType("xml")
 public class XMLBookRepository implements BookRepository {
 	private final Map<Integer, Book> books = new HashMap<>();
 
